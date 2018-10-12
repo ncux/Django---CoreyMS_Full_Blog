@@ -1,8 +1,8 @@
 # Created by https://www.gitignore.io
 
 CoreyMS_Full_Blog/settings.py
-CoreyMS_Full_Blog/media/
-CoreyMS_Full_Blog/static/
+media/
+static/
 
 .idea
 
