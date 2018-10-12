@@ -1,0 +1,22 @@
+{% extends 'blog/layout.html' %}
+
+{% block content %}
+
+    <div class="content-section">
+
+    <h3 class="my-3 text-danger">Do you wanna delete the post "{{ object.title }}"?</h3>
+
+         <form method="post">
+             {% csrf_token %}
+
+             <button type="submit" class="btn btn-danger p-3">Delete</button>
+             <a href="{% url 'blog:blog_detail_page' object.id %}" class="btn btn-secondary p-3">Cancel</a>
+         </form>
+
+    </div>
+
+
+
+
+
+{% endblock %}

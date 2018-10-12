@@ -1,0 +1,26 @@
+{% extends 'blog/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="content-section">
+
+         <form method="post">
+             {% csrf_token %}
+
+            {{ form | crispy }}
+             <button type="submit" class="btn btn-success">Register</button>
+         </form>
+
+    <div class="border-top pt-3">
+        <small class="text-muted">Already registered? <a href="{% url 'users:login_user' %}" class="">Login</a> instead.</small>
+
+    </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}

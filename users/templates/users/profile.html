@@ -1,0 +1,43 @@
+{% extends 'blog/layout.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+        <div class="content-section">
+          <div class="media">
+            <img src="{{ user.profile.avatar.url }}" class="rounded-circle account-img">
+                <div class="media-body">
+                  <h2 class="account-heading">{{ user.username }}</h2>
+                  <p class="text-secondary">{{ user.email }}</p>
+                </div>
+          </div>
+            <br>
+            <h4 class="my-3">Update your profile information</h4>
+
+            {% if user %}
+
+                 <form method="post" enctype="multipart/form-data">
+                     {% csrf_token %}
+
+                     {{ user_form | crispy }}
+                     {{ profile_form | crispy }}
+                     <button type="submit" class="btn btn-success">Save</button>
+                 </form>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

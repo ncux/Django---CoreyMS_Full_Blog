@@ -1,0 +1,56 @@
+{% extends 'blog/layout.html' %}
+
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block content %}
+
+    <h2 class="my-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
+
+    {% for post in posts %}
+
+        <article class="media content-section">
+
+        <img src="{{ post.author.profile.avatar.url }}" alt="User avatar" class="rounded-circle article-img">
+
+          <div class="media-body">
+            <h2><a class="article-title" href="{% url 'blog:blog_detail_page' post.id %}" target="_blank">{{ post.title }}</a></h2>
+
+            <div class="article-metadata">
+              Created by <a class="mr-2" href="">{{ post.author }}</a> <br>
+              <small class="text-muted">{{ post.date_created | date:"M j, Y" }} at {{ post.date_created | date:"H:i" }}</small>
+            </div>
+
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+
+    {% endfor %}
+
+    {% if is_paginated %}
+
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="btn btn-outline-primary">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">Previous</a>
+        {% endif %}
+
+            {% for page_num in page_obj.paginator.page_range %}
+                {% if page_obj.number == page_num %}
+                   <a href="?page={{ page_num }}" class="btn btn-primary">{{ page_num }}</a>
+                {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
+                   <a href="?page={{ page_num }}" class="btn btn-outline-primary">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+        {% endif %}
+
+    {% endif %}
+
+
+
+{% endblock %}
